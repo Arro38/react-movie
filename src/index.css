@@ -1,13 +1,111 @@
-body {
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  box-sizing: border-box;
+  /* border: 1px red solid; */
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+  background: rgb(63, 94, 251);
+  background: radial-gradient(
+    circle,
+    rgba(63, 94, 251, 1) 0%,
+    rgba(252, 70, 107, 1) 100%
+  );
+  color: white;
+  font-family: "Roboto", sans-serif;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+header {
+  gap: 1rem;
+  margin-top: 10px;
+}
+h1 {
+  letter-spacing: 2px;
+  text-align: center;
+  margin: 20px;
+}
+
+button,
+input[type="submit"] {
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  color: white;
+  background: rgb(63, 94, 251);
+  font-size: large;
+  letter-spacing: 1px;
+}
+
+button:hover,
+input[type="submit"]:hover {
+  cursor: pointer;
+  background: rgb(252, 70, 107);
+}
+
+input[type="submit"] {
+  width: 90%;
+}
+
+input[type="text"] {
+  width: 90%;
+  padding: 10px;
+}
+/* TODO Fix Center Form */
+.routingBtn,
+form,
+.sortContainer,
+main,
+.card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+form {
+  flex-direction: column;
+  width: 20%;
+}
+
+.card {
+  border: 5px solid white;
+  border-radius: 5px;
+  background: black;
+  width: 350px;
+  flex-direction: column;
+  padding: 10px;
+  position: relative;
+}
+main {
+  margin: 20px;
+}
+
+.heartIconCard {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  cursor: pointer;
+}
+
+.overview {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 4; /* number of lines to show */
+  line-clamp: 4;
+  -webkit-box-orient: vertical;
+}
+.title {
+  font-size: 1.5rem;
+  height: 50px;
+  font-weight: bold;
+  margin-bottom: 10px;
 }
