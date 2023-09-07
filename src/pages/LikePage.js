@@ -1,13 +1,17 @@
 import React from "react";
 import Card from "../components/Card";
+import { useSelector } from "react-redux";
 
 function LikePage() {
-  const [movie, setMovie] = React.useState({});
-  React.useEffect(() => {
-    const likedMovie = JSON.parse(localStorage.getItem("likedmovie"));
-    setMovie(likedMovie);
-  }, []);
-  return <main>{movie && movie.id && <Card movie={movie} />}</main>;
+  const movies = useSelector((state) => state.movie.value);
+  return (
+    <main>
+      {movies &&
+        movies.map((movie, index) => {
+          return <Card movie={movie} key={index} />;
+        })}
+    </main>
+  );
 }
 
 export default LikePage;

@@ -5,16 +5,18 @@ import HomePage from "./pages/HomePage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import LikePage from "./pages/LikePage";
 import Nav from "./components/Nav";
+import { store } from "./app/store";
+import { Provider } from "react-redux";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <BrowserRouter>
+  <BrowserRouter>
+    <Provider store={store}>
       <Nav />
       <Routes>
         <Route path="/*" element={<HomePage />} />
         <Route path="/like" element={<LikePage />} />
       </Routes>
-    </BrowserRouter>
-  </React.StrictMode>
+    </Provider>
+  </BrowserRouter>
 );

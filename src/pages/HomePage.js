@@ -1,11 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Card from "../components/Card";
 import { AiOutlineArrowUp, AiOutlineArrowDown } from "react-icons/ai";
+import { useDispatch, useSelector } from "react-redux";
+import { updateCurrentMovies } from "../features/movie/movieSlice";
 
 function HomePage() {
   const [searchValue, setSearchValue] = useState("");
-  const [movies, setMovies] = useState([]);
   const [sort, setSort] = useState("");
+  const [movies, setMovies] = useState([]);
+  let currentMovies = useSelector((state) => state.movie.currentMovies);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    setMovies([...currentMovies]);
+  }, [currentMovies]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,6 +22,7 @@ function HomePage() {
     );
     const data = await request.json();
     setMovies(data.results);
+    dispatch(updateCurrentMovies(data.results));
   };
 
   return (
@@ -49,19 +57,20 @@ function HomePage() {
         </div>
       </header>
       <main>
-        {movies
-          .sort((a, b) => {
-            if (sort === "top") {
-              return b.vote_average - a.vote_average;
-            } else if (sort === "flop") {
-              return a.vote_average - b.vote_average;
-            } else {
-              return 0;
-            }
-          })
-          .map((movie, index) => {
-            return <Card movie={movie} key={index} />;
-          })}
+        {movies &&
+          movies
+            .sort((a, b) => {
+              if (sort === "top") {
+                return b.vote_average - a.vote_average;
+              } else if (sort === "flop") {
+                return a.vote_average - b.vote_average;
+              } else {
+                return 0;
+              }
+            })
+            .map((movie, index) => {
+              return <Card movie={movie} key={index} />;
+            })}
       </main>
     </div>
   );

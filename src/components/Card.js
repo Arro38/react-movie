@@ -1,20 +1,24 @@
 import React, { useEffect } from "react";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import { useDispatch, useSelector } from "react-redux";
+import { add, remove } from "../features/movie/movieSlice";
 
 function Card({ movie }) {
   const [like, setLike] = React.useState(false);
-
+  const dispatch = useDispatch();
+  const movies = useSelector((state) => state.movie.value);
+  // TODO : CHECK DISPATCH IN USEEFFECT
   useEffect(() => {
-    const likedMovie = JSON.parse(localStorage.getItem("likedmovie"));
-    if (likedMovie && likedMovie.id.toString() === movie.id.toString()) {
+    if (movies && movies.length > 0 && movies.find((m) => m.id === movie.id)) {
       setLike(true);
     }
-  }, []);
+  }, [movies, movie.id]);
+
   const handleClick = () => {
     if (like) {
-      localStorage.removeItem("likedmovie");
+      dispatch(remove(movie));
     } else {
-      localStorage.setItem("likedmovie", JSON.stringify(movie));
+      dispatch(add(movie));
     }
     setLike(!like);
   };
